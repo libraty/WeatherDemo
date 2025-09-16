@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:weatherdemo/model/weather_model.dart';
+import 'package:weatherdemo/repository/weather_repository.dart';
+
+class WeatherViewModel with ChangeNotifier {
+  final WeatherRepository _repository = WeatherRepository();
+
+  WeatherModel? _weatherData;
+  bool _isLoading = false;
+  String _errorMessage = '';
+
+  WeatherModel? get WeatherData => _weatherData;
+  bool get isLoading => _isLoading;
+  String get errorMessage => _errorMessage;
+  bool get hasError => _errorMessage.isNotEmpty;
+
+  Future<void> fetchWeather(String cityName) async {
+    _isLoading = true;
+    _errorMessage = '';
+    notifyListeners();
+
+    try {
+      _weatherData = await _repository.getWeather(cityName);
+    } catch (e) {
+      _errorMessage = e.toString();
+      _weatherData = null;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+
+    void clearError() {
+      _errorMessage = '';
+      notifyListeners();
+    }
+  }
+}
