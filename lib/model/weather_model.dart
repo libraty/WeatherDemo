@@ -1,7 +1,7 @@
 //天气数据模型
 import 'dart:html';
 
-class weatherModel {
+class WeatherModel {
   final String cityName;
   final String cityId;
   final double temperature;
@@ -11,7 +11,7 @@ class weatherModel {
   final String windSpeed;
   final String updateTime;
 
-  weatherModel(
+  WeatherModel(
       {required this.cityName,
       required this.cityId,
       required this.temperature,
@@ -21,13 +21,13 @@ class weatherModel {
       required this.windSpeed,
       required this.updateTime});
 
-  factory weatherModel.fromJson(Map<String, dynamic> json) {
+  factory WeatherModel.fromJson(Map<String, dynamic> json) {
     final location = json['location'] != null && json['location'].isNotEmpty
         ? json['location'][0]
         : null;
     final now = json['now'];
 
-    return weatherModel(
+    return WeatherModel(
       cityName: location?['name'] ?? '未知城市',
       cityId: location?['id'] ?? '',
       temperature: double.parse(now?['temp'] ?? '0'),
@@ -52,8 +52,8 @@ class weatherModel {
     };
   }
 
-  static weatherModel fromCache(Map<String, dynamic> cache) {
-    return weatherModel(
+  static WeatherModel fromCache(Map<String, dynamic> cache) {
+    return WeatherModel(
       cityName: cache['cityName'],
       cityId: cache['cityId'],
       temperature: cache['temperature'],

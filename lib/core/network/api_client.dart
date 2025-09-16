@@ -9,7 +9,7 @@ import 'package:weatherdemo/core/network/api_exception.dart';
 class ApiClient {
   final String baseUrl;
 
-  ApiClient(this.baseUrl);
+  ApiClient({required this.baseUrl});
   Future<dynamic> get(String endpoint, {Map<String, dynamic>? params}) async {
     try {
       final Map<String, dynamic> queryParams = {
