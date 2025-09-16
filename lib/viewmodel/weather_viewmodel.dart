@@ -9,7 +9,7 @@ class WeatherViewModel with ChangeNotifier {
   bool _isLoading = false;
   String _errorMessage = '';
 
-  WeatherModel? get WeatherData => _weatherData;
+  WeatherModel? get weatherData => _weatherData;
   bool get isLoading => _isLoading;
   String get errorMessage => _errorMessage;
   bool get hasError => _errorMessage.isNotEmpty;
@@ -28,10 +28,10 @@ class WeatherViewModel with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
 
-    void clearError() {
-      _errorMessage = '';
-      notifyListeners();
-    }
+  void clearError() {
+    _errorMessage = '';
+    notifyListeners();
   }
 }
