@@ -11,15 +11,16 @@ class WeatherModel {
   final String windSpeed;
   final String updateTime;
 
-  WeatherModel(
-      {required this.cityName,
-      required this.cityId,
-      required this.temperature,
-      required this.condition,
-      required this.iconUrl,
-      required this.humidity,
-      required this.windSpeed,
-      required this.updateTime});
+  WeatherModel({
+    required this.cityName,
+    required this.cityId,
+    required this.temperature,
+    required this.condition,
+    required this.iconUrl,
+    required this.humidity,
+    required this.windSpeed,
+    required this.updateTime,
+  });
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     final location = json['location'] != null && json['location'].isNotEmpty
