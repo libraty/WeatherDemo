@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:weatherdemo/core/network/api_client.dart';
 import '../core/constants.dart';
+import '../core/network/api_exception.dart';
 import '../core/utils/cache_manager.dart';
 import '../model/weather_model.dart';
 
@@ -18,10 +19,10 @@ class WeatherRepository {
         return WeatherModel.fromCache(cachedData);
       }
 
-      final cityLookupUri = Uri.parse(ApiConstants.cityLookup).replace(
-        queryParameters: {'location': cityName, 'key': ApiConstants.apikey},
-      );
-      print('城市查询url:${cityLookupUri}');
+      // final cityLookupUri = Uri.parse(ApiConstants.cityLookup).replace(
+      //   queryParameters: {'location': cityName, 'key': ApiConstants.apikey},
+      // );
+      // print('城市查询url:${cityLookupUri}');
 
       final locationRes = await _apiClient.get(
         ApiConstants.cityLookup,
@@ -30,14 +31,14 @@ class WeatherRepository {
       print('拿到城市数据：$locationRes');
 
       if (locationRes['location'] == null || locationRes['location'].isEmpty) {
-        throw Exception('城市未找到');
+        throw ApiException('城市未找到', 404);
       }
       final String cityId = locationRes['location'][0]['id'];
 
-      final weatherNowUri = Uri.parse(ApiConstants.weatherNow).replace(
-        queryParameters: {'location': cityId, 'key': ApiConstants.apikey},
-      );
-      print('天气查询URL: ${weatherNowUri}');
+      // final weatherNowUri = Uri.parse(ApiConstants.weatherNow).replace(
+      //   queryParameters: {'location': cityId, 'key': ApiConstants.apikey},
+      // );
+      // print('天气查询URL: ${weatherNowUri}');
 
       final weatherRes = await ApiClient(baseUrl: ApiConstants.baseUrl).get(
           ApiConstants.weatherNow,

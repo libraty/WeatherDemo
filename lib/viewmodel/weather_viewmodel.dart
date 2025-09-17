@@ -22,8 +22,9 @@ class WeatherViewModel with ChangeNotifier {
     try {
       _weatherData = await _repository.getWeather(cityName);
     } catch (e) {
+      // String Msg;
       print('WeatherViewModel 错误: $e');
-      _errorMessage = e.toString();
+      _errorMessage = '城市查询异常，请确认城市名称';
       _weatherData = null;
     } finally {
       _isLoading = false;
