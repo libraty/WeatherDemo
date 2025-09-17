@@ -22,6 +22,7 @@ class WeatherViewModel with ChangeNotifier {
     try {
       _weatherData = await _repository.getWeather(cityName);
     } catch (e) {
+      print('WeatherViewModel 错误: $e');
       _errorMessage = e.toString();
       _weatherData = null;
     } finally {

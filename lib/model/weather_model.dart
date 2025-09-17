@@ -1,6 +1,4 @@
 //天气数据模型
-import 'dart:html';
-
 class WeatherModel {
   final String cityName;
   final String cityId;

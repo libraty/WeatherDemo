@@ -73,7 +73,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
             ),
           ),
           IconButton(
-            onPressed: () => _searchWeather,
+            onPressed: () => _searchWeather(context),
             icon: const Icon(
               Icons.search,
               color: Colors.blueAccent,

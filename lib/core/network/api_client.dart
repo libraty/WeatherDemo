@@ -1,6 +1,7 @@
 //网络请求封装
 import 'dart:convert';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:weatherdemo/core/constants.dart';
 import 'package:http/http.dart' as http;
@@ -20,23 +21,25 @@ class ApiClient {
       final Uri uri = Uri.parse('$baseUrl$endpoint').replace(
         queryParameters: queryParams,
       );
-      final res = await http.get(uri).timeout(const Duration(seconds: 10));
+      print('查询的url是: ${uri}');
+      final res = await http.get(uri).timeout(const Duration(seconds: 100));
       if (res.statusCode == 200) {
-        final Map<String, dynamic> data = json.decode(res.body);
+        Uint8List responseBodyBytes = res.bodyBytes;
+        String decodedBody = utf8.decode(responseBodyBytes);
+        final Map<String, dynamic> data = json.decode(decodedBody);
         if (data['code'] == '200') {
           return data;
         } else {
           throw ApiException(
-              int.parse(data['code']) as String, data['message'] ?? '未知错误');
+              data['message'] ?? '未知错误', int.parse(data['code']));
         }
       } else {
-        throw ApiException(
-            res.statusCode as String, 'HTTP error: ${res.statusCode}' as int);
+        throw ApiException('HTTP error:${res.statusCode}', res.statusCode);
       }
     } on http.ClientException catch (e) {
-      throw ApiException(0 as String, 'NetWork error: $e' as int);
+      throw ApiException('NetWork error: $e', 500);
     } on Exception catch (e) {
-      throw ApiException(0 as String, 'NetWork error: $e' as int);
+      throw ApiException('NetWork error: $e', 500);
     }
   }
 }
