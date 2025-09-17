@@ -57,7 +57,7 @@ Repository	WeatherRepository	            统一数据获取入口：屏蔽缓存
 ## 快速启动
 - 克隆仓库
     bash
-    git clone <仓库地址>
+    git clone https://github.com/libraty/weatherdemo.git
     cd weather-app
 
 - 安装依赖
