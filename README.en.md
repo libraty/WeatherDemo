@@ -75,6 +75,10 @@ Repository	WeatherRepository	            统一数据获取入口：屏蔽缓存
 - 运行项目
     bash
     flutter run
+- 导出apk
+    bash
+    flutter build apk
+    文件在build\app\outputs\flutter-apk\app-release.apk
 ## 核心功能
 城市天气查询：输入城市名，获取对应实时天气数据
 多维度天气展示：温度、天气状态（图标）、湿度、风速、气压等
