@@ -1,5 +1,4 @@
 # Miscellaneous
-node_modules
 .env
 *.class
 *.log
